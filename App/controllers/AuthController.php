@@ -12,11 +12,6 @@ class AuthController
   public function loginpage()
   {
 
-    // if (isset($_SESSION['user'])) {
-    //   header('Location: /brief10/public/index.php/home');
-    //   exit;
-    // }
-
     SessionController::checksesession('user', 'home');
     $title = 'Login | page';
     include '../App/view/login.php';
@@ -24,11 +19,8 @@ class AuthController
 
   public function registerpage()
   {
-    if (isset($_SESSION['user'])) {
-        header('Location: /brief10/public/index.php/home');
 
-      exit;
-    }
+    SessionController::checksesession('user', 'home');
     $title = 'Refister | page';
     include '../App/view/register.php';
   }
