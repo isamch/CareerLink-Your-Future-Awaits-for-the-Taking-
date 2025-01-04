@@ -18,7 +18,6 @@
         rel="stylesheet"
         />
 
-
 </head>
 <body>
     <?php include 'nav.php'; ?>

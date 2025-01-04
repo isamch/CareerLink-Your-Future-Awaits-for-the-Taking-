@@ -47,7 +47,7 @@
 
       <div class="row g-4 g-xxl-5">
         <div class="col-lg-4 text-center">
-          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 " style="" id="">
+          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 ">
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
                 <div class="lc-block mb-4">
@@ -112,7 +112,7 @@
           </div>
         </div>
         <div class="col-lg-4 text-center">
-          <div class="lc-block card h-100 px-xl-3 border-0 bg-light py-lg-4 position-relative" style="">
+          <div class="lc-block card h-100 px-xl-3 border-0 bg-light py-lg-4 position-relative">
             <div class="card-body d-flex flex-column justify-content-between">
 
               <div class="lc-block position-absolute top-0 mt-2 end-0 me-3">
@@ -181,7 +181,7 @@
         </div>
 
         <div class="col-lg-4 text-center">
-          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 " style="" id="">
+          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 ">
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
                 <div class="lc-block mb-4">

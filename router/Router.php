@@ -4,6 +4,7 @@ namespace Router;
 
 use MyApp\controllers\NotFoundController;
 use MyApp\controllers\AuthController;
+use MyApp\controllers\PostesController;
 
 class Router
 {
@@ -36,6 +37,7 @@ class Router
     if (isset($this->routes[$route])) {
       
       $newregister = new AuthController;
+      $newpost = new PostesController;
 
       // check for post method :
       if ( isset($_POST['register']) ) {
@@ -48,6 +50,13 @@ class Router
         echo 'pots login method';
         // dump($_POST);
         $newregister->login();
+      }
+
+      if ( isset($_POST['post']) ) {
+        echo ' pots post method ';
+        // dump($_POST);
+        // dump($_POST['post']);
+        $newpost->addpostes();
       }
 
       call_user_func($this->routes[$route]);

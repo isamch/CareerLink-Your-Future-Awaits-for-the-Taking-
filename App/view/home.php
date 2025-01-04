@@ -1,5 +1,19 @@
 <?php include 'includes/header.php'; ?>
 
+<?php
+dump($_SESSION['user']);
+
+dump($_SESSION['user']['username'])
+?>
+
+
+<?php
+
+dump($posts);
+dump($category);
+
+?>
+
 <div class="container mt-2">
     <div class="row">
 
@@ -9,8 +23,8 @@
                 <div class="card-body text-center">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle mb-3"
                         height="80" alt="Avatar" loading="lazy" />
-                    <h5 class="card-title">Your Name</h5>
-                    <p class="text-muted">@username</p>
+                    <h5 class="card-title"><?php echo $_SESSION['user']['username']; ?></h5>
+                    <p class="text-muted"><?php echo $_SESSION['user']['roles']; ?></p>
                     <button class="btn btn-primary btn-sm">View Profile</button>
                 </div>
             </div>
@@ -19,43 +33,66 @@
         <!-- main -->
         <div class="col-md-6">
             <div class="px-0">
-                <div class="card shadow-0 mb-2">
-                    <div class="card-body border pb-2">
-                        <div class="d-flex">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle"
-                                height="50" alt="Avatar" loading="lazy" />
-                            <div class="d-flex align-items-center w-100 ps-3">
-                                <div class="w-100">
-                                    <input type="text" id="form143" class="form-control form-status border-0 py-1 px-0"
-                                        placeholder="What's happening" />
+
+                <?php if ($_SESSION['user']['roles'] != 'client'): ?>
+
+                    <div class="card shadow-0 mb-2">
+                        <div class="card-body border pb-2">
+                            <div class="d-flex">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                                    class="rounded-circle"
+                                    height="50"
+                                    alt="Avatar"
+                                    loading="lazy" />
+                                <div class="d-flex align-items-center w-100 ps-3">
+
+                                    <form  class="w-100" method="POST" action="/brief10/public/index.php/home">
+
+                                        <div class="container">
+                                            <!-- Category  -->
+                                            <div class="mb-3">
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select id="category" name="category_id" class="form-select w-100 border-0 py-2 px-3" required>
+                                                    <?php foreach($category as $categorykey => $categoryvalue): ?>
+                                                    <option value="<?php echo $categoryvalue['id'] ?>"><?php echo $categoryvalue['name'] ?></option>
+                                                   
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            <!-- Tags  -->
+                                            <div class="mb-3">
+                                                <label for="tags" class="form-label">Tags (separate with commas):</label>
+                                                <input type="text" id="tags" name="tags" class="form-control w-100 py-2 px-3" placeholder="e.g. html, javascript" required>
+                                            </div>
+
+                                            <!-- Content  -->
+                                            <div class="mb-3">
+                                                <label for="content" class="form-label">Content:</label>
+                                                <textarea id="content" name="content" class="form-control w-100 py-2 px-3" rows="2" placeholder="What's happening" required></textarea>
+                                            </div>
+
+                                            <!-- url  -->
+                                            <div class="mb-3">
+                                                <label for="url" class="form-label">Url :</label>
+                                                <input type="text" id="url" name="url" class="form-control w-100 py-2 px-3" placeholder="https://www.exemple.com" required>
+                                            </div>
+
+                                            <!--  button -->
+                                            <div class="text-center">
+                                                <button type="submit" name="post" class="btn btn-primary w-100 py-2">Post</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <ul class="list-unstyled d-flex flex-row ps-3 pt-3" style="margin-left: 50px;">
-                                <li>
-                                    <a href="#"><i class="far fa-image pe-2"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-photo-video px-2"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-chart-bar px-2"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="far fa-smile px-2"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="far fa-calendar-check px-2"></i></a>
-                                </li>
-                            </ul>
-                            <div class="d-flex align-items-center">
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                    class="btn btn-primary btn-rounded">Tweet</button>
-                            </div>
+
+
                         </div>
                     </div>
-                </div>
+
+                <?php endif; ?>
 
                 <!-- postes -->
                 <div class="overflow-scroll postes border-top rounded-3" style="max-height: 400px; overflow-y: scroll;">
@@ -70,61 +107,35 @@
                         }
                     </style>
 
-                    <div class="d-flex p-3 border mb-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                            height="50" alt="Avatar" loading="lazy" />
-                        <div class="d-flex w-100 ps-3">
-                            <div>
-                                <a href="">
-                                    <h6 class="text-body">
-                                        Miley Cyrus
-                                        <span class="small text-muted font-weight-normal">@mileycyrus</span>
-                                        <span class="small text-muted font-weight-normal"> • </span>
-                                        <span class="small text-muted font-weight-normal">2h</span>
-                                        <span><i class="fas fa-angle-down float-end"></i></span>
-                                    </h6>
-                                </a>
-                                <p style="line-height: 1.2;">
-                                    Lorem ipsum dolor, sit amet <a href="">#consectetur</a> adipisicing elit.
-                                    Nobis assumenda eveniet ipsum libero mollitia vero doloremque
-                                    <a href="">#perspiciatis</a> molestiae omnis, quam iure dicta reprehenderit
-                                    distinctio facere labore atque, sit <a href="">#ratione</a> quo.
-                                </p>
-                                <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-                                    <li>
-                                        <i class="far fa-comment"></i>
-                                    </li>
-                                    <li><i class="fas fa-retweet"></i><span class="small ps-2">7</span></li>
-                                    <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
-                                    <li>
-                                        <i class="far fa-share-square"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="d-flex p-3 border mb-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                            height="50" alt="Avatar" loading="lazy" />
-                        <div class="d-flex w-100 ps-3">
-                            <div>
-                                <a href="">
-                                    <h6 class="text-body">
-                                        Miley Cyrus
-                                        <span class="small text-muted font-weight-normal">@mileycyrus</span>
-                                        <span class="small text-muted font-weight-normal"> • </span>
-                                        <span class="small text-muted font-weight-normal">2h</span>
-                                        <span><i class="fas fa-angle-down float-end"></i></span>
-                                    </h6>
-                                </a>
-                                <p style="line-height: 1.2;">
-                                    Lorem ipsum dolor, sit amet <a href="">#consectetur</a> adipisicing elit.
-                                    Nobis assumenda eveniet ipsum libero mollitia vero doloremque
-                                    <a href="">#perspiciatis</a> molestiae omnis, quam iure dicta reprehenderit
-                                    distinctio facere labore atque, sit <a href="">#ratione</a> quo.
-                                </p>
-                                <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
+                    <?php foreach ($posts as $postkey => $postvalue): ?>
+                        <div class="d-flex p-3 border mb-1">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
+                                height="50" alt="Avatar" loading="lazy" />
+                            <div class="d-flex w-100 ps-3">
+                                <div>
+                                    <div>
+                                        <h6 class="text-body">
+                                            Autor name
+                                            <span class="small text-muted font-weight-normal"><?php echo $postvalue['name'] ?></span>
+                                            <!-- <span class="small text-muted font-weight-normal"> • </span>
+                                        <span class="small text-muted font-weight-normal">2h</span> -->
+                                            <span><i class="fas fa-angle-down float-end"></i></span>
+                                        </h6>
+                                    </div>
+                                    <p style="line-height: 1.2;">
+                                        <?php echo $postvalue['content'] ?>
+                                        <?php
+                                        $tagsarray = explode(",", $postvalue['tags']);
+                                        ?>
+                                        <?php foreach ($tagsarray as $tag): ?>
+                                            <a href=""><?php echo $tag; ?></a>
+                                        <?php endforeach; ?>
+                                    </p>
+                                    <a href="<?php echo $postvalue['url']; ?>" class="text-decoration-none text-primary" target="_blank">
+                                        <?php echo $postvalue['url']; ?>
+                                    </a>
+                                    <!-- <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
                                     <li>
                                         <i class="far fa-comment"></i>
                                     </li>
@@ -133,111 +144,14 @@
                                     <li>
                                         <i class="far fa-share-square"></i>
                                     </li>
-                                </ul>
+                                </ul> -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex p-3 border mb-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                            height="50" alt="Avatar" loading="lazy" />
-                        <div class="d-flex w-100 ps-3">
-                            <div>
-                                <a href="">
-                                    <h6 class="text-body">
-                                        Miley Cyrus
-                                        <span class="small text-muted font-weight-normal">@mileycyrus</span>
-                                        <span class="small text-muted font-weight-normal"> • </span>
-                                        <span class="small text-muted font-weight-normal">2h</span>
-                                        <span><i class="fas fa-angle-down float-end"></i></span>
-                                    </h6>
-                                </a>
-                                <p style="line-height: 1.2;">
-                                    Lorem ipsum dolor, sit amet <a href="">#consectetur</a> adipisicing elit.
-                                    Nobis assumenda eveniet ipsum libero mollitia vero doloremque
-                                    <a href="">#perspiciatis</a> molestiae omnis, quam iure dicta reprehenderit
-                                    distinctio facere labore atque, sit <a href="">#ratione</a> quo.
-                                </p>
-                                <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-                                    <li>
-                                        <i class="far fa-comment"></i>
-                                    </li>
-                                    <li><i class="fas fa-retweet"></i><span class="small ps-2">7</span></li>
-                                    <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
-                                    <li>
-                                        <i class="far fa-share-square"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="d-flex p-3 border mb-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                            height="50" alt="Avatar" loading="lazy" />
-                        <div class="d-flex w-100 ps-3">
-                            <div>
-                                <a href="">
-                                    <h6 class="text-body">
-                                        Miley Cyrus
-                                        <span class="small text-muted font-weight-normal">@mileycyrus</span>
-                                        <span class="small text-muted font-weight-normal"> • </span>
-                                        <span class="small text-muted font-weight-normal">2h</span>
-                                        <span><i class="fas fa-angle-down float-end"></i></span>
-                                    </h6>
-                                </a>
-                                <p style="line-height: 1.2;">
-                                    Lorem ipsum dolor, sit amet <a href="">#consectetur</a> adipisicing elit.
-                                    Nobis assumenda eveniet ipsum libero mollitia vero doloremque
-                                    <a href="">#perspiciatis</a> molestiae omnis, quam iure dicta reprehenderit
-                                    distinctio facere labore atque, sit <a href="">#ratione</a> quo.
-                                </p>
-                                <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-                                    <li>
-                                        <i class="far fa-comment"></i>
-                                    </li>
-                                    <li><i class="fas fa-retweet"></i><span class="small ps-2">7</span></li>
-                                    <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
-                                    <li>
-                                        <i class="far fa-share-square"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
 
-                    <div class="d-flex p-3 border mb-1">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                            height="50" alt="Avatar" loading="lazy" />
-                        <div class="d-flex w-100 ps-3">
-                            <div>
-                                <a href="">
-                                    <h6 class="text-body">
-                                        Miley Cyrus
-                                        <span class="small text-muted font-weight-normal">@mileycyrus</span>
-                                        <span class="small text-muted font-weight-normal"> • </span>
-                                        <span class="small text-muted font-weight-normal">2h</span>
-                                        <span><i class="fas fa-angle-down float-end"></i></span>
-                                    </h6>
-                                </a>
-                                <p style="line-height: 1.2;">
-                                    Lorem ipsum dolor, sit amet <a href="">#consectetur</a> adipisicing elit.
-                                    Nobis assumenda eveniet ipsum libero mollitia vero doloremque
-                                    <a href="">#perspiciatis</a> molestiae omnis, quam iure dicta reprehenderit
-                                    distinctio facere labore atque, sit <a href="">#ratione</a> quo.
-                                </p>
-                                <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
-                                    <li>
-                                        <i class="far fa-comment"></i>
-                                    </li>
-                                    <li><i class="fas fa-retweet"></i><span class="small ps-2">7</span></li>
-                                    <li><i class="far fa-heart"></i><span class="small ps-2">35</span></li>
-                                    <li>
-                                        <i class="far fa-share-square"></i>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- add new post here -->
 
                 </div>
