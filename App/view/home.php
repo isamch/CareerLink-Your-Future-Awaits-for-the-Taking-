@@ -12,6 +12,15 @@ dump($_SESSION['user']['username'])
 dump($posts);
 dump($category);
 
+// if (isset($_POST['category_id'])) {
+    // dump($_POST['category_id']);
+    // dump($_POST['tags']);
+    // dump($_POST['content']);
+    // dump($_POST['url']);
+    dump($_SESSION['err']);
+
+// }
+
 ?>
 
 <div class="container mt-2">

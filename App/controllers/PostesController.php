@@ -33,25 +33,26 @@ class PostesController
             exit;
         }
 
-        if (!preg_match('/^([a-zA-Z0-9_]+(,[a-zA-Z0-9_]+)*)?$/', $tags)) {
-            header('Location: /brief10/public/index.php/home');
+        if (!preg_match('/^([a-zA-Z0-9]+( [a-zA-Z0-9]+)*)?$/', $tags)) {
+            header('Location: /brief10/public/index.php/home?error=1');
             exit;
         }
 
         if (!preg_match('/^\d+$/', $category_id)) {
-            header('Location: /brief10/public/index.php/home');
+            header('Location: /brief10/public/index.php/home?error=2');
             exit;
         }
 
         if (!preg_match('/^.{1,500}$/', $content)) {
-            header('Location: /brief10/public/index.php/home');
+            header('Location: /brief10/public/index.php/home?error=3');
             exit;
         }
 
-        if (!preg_match('/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i', $url)) {
-            header('Location: /brief10/public/index.php/home');
+        if (!preg_match('/^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]*)?@)?([a-zA-Z0-9.-]+|\[[a-fA-F0-9:]+\])(:[0-9]+)?(\/[^\s]*)?$/', $url)) {
+            header('Location: /brief10/public/index.php/home?error=4');
             exit;
         }
+
 
 
         // call insert fun in model post :
@@ -59,13 +60,13 @@ class PostesController
         $post_id = $postModel->insertPost($category_id, $content, $url);
 
         if (!$post_id) {
-            header('Location: /brief10/public/index.php/home?error=post');
+            header("Location: /brief10/public/index.php/home?error=post$post_id");
             exit;
         }
 
         $tagController = new TagsController();
         $tags = explode(" ", $tags);
-        
+
         foreach ($tags as $tag) {
             $tag_id = $tagController->addTag(trim($tag)); 
 
