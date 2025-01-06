@@ -57,7 +57,8 @@ class PostesController
 
         // call insert fun in model post :
         $postModel = new Postes();
-        $post_id = $postModel->insertPost($category_id, $content, $url);
+        $authorid = $_SESSION['user']['id'];
+        $post_id = $postModel->insertPost($category_id, $content, $url, $authorid);
 
         if (!$post_id) {
             header("Location: /brief10/public/index.php/home?error=post$post_id");

@@ -34,15 +34,16 @@ class Postes
   }
 
 
-  public function insertPost($category_id, $content, $url)
+  public function insertPost($category_id, $content, $url, $authorid)
   {
 
 
-    $query = "INSERT INTO postes (category_id, content, url) VALUES (:category_id, :content, :url)";
+    $query = "INSERT INTO postes (category_id, content, url, createduserid) VALUES (:category_id, :content, :url, :createduserid)";
     $stmt = $this->conn->Connection()->prepare($query);
     $stmt->bindParam(':category_id', $category_id);
     $stmt->bindParam(':content', $content);
     $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':createduserid', $authorid);
 
     if ($stmt->execute()) {
 
