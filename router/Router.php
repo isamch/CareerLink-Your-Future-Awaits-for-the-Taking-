@@ -64,6 +64,14 @@ class Router
         echo ' restore post post method ';
         $newpost->restorepostes();
       }
+
+      if ( isset($_POST['updateposte']) ) {
+        echo ' update post post method ';
+        $newpost->updateposte();
+      }
+
+
+
       
 
 

@@ -26,7 +26,6 @@
   <header class="header" id="header">
     <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
 
-
     <div class="navbar navbar-expand-lg navbar-light bg-light border-bottom py-2">
       <div class="container-fluid">
         <ul class="navbar-nav mx-auto d-none d-lg-flex">
@@ -54,8 +53,6 @@
           <span class="nav_logo-name">Home</span>
         </a>
         <div class="nav_list">
-
-
           <a href="/brief10/public/index.php/dashboard?section=postedashboard" class="nav_link <?php echo (isset($_GET['section']) && $_GET['section'] == 'postedashboard' || !isset($_GET['section'])) ? ' active' : ''; ?>">
             <i class='bx bx-file nav_logo-icon'></i>
             <span class="nav_name">Postes</span>
@@ -78,29 +75,21 @@
   </div>
   <!--Container Main start-->
   <div class="height-100 bg-light">
-    <!-- <h4>Main Components</h4> -->
 
-    
+  
     <?php 
-
       if (isset($_GET['section'])) {
         $getpath = $_GET['section'];
-      
         include_once "includes/$getpath.php";
-
-      }else{
+      } else {
         include_once "includes/postedashboard.php";
-
       }
-
-
-    
     ?>
-
-
-   
   </div>
   <!--Container Main end-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
@@ -134,6 +123,6 @@
       linkColor.forEach(l => l.addEventListener('click', colorLink));
     });
   </script>
-</body>
 
+</body>
 </html>

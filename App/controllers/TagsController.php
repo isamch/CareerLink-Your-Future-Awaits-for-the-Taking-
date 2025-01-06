@@ -29,4 +29,11 @@ class TagsController
     $postTagModel = new PostTag();
     $postTagModel->insertPostTag($post_id, $tag_id);
   }
+
+  public function deleteTeagToPost($post_id)
+  {
+    $postTagModel = new PostTag();
+    $postTagModel->deletePostTag($post_id);
+  }
+  
 }

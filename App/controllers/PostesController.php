@@ -33,10 +33,11 @@ class PostesController
             exit;
         }
 
-        if (!preg_match('/^([a-zA-Z0-9]+( [a-zA-Z0-9]+)*)?$/', $tags)) {
+        if (!preg_match('/^([a-zA-Z0-9@#]+( [a-zA-Z0-9@#]+)*)?$/', $tags)) {
             header('Location: /brief10/public/index.php/home?error=1');
             exit;
         }
+        
 
         if (!preg_match('/^\d+$/', $category_id)) {
             header('Location: /brief10/public/index.php/home?error=2');
@@ -78,6 +79,73 @@ class PostesController
 
         header('Location: /brief10/public/index.php/home');
         exit;
+    }
+
+    // // update :
+
+    public function updateposte()
+    {
+
+        $postid = $_POST['updateid'];
+        $tags = $_POST['updatetags'];
+        $content = $_POST['updatecontent'];
+        $url = $_POST['updateurl'];
+        $category_id = $_POST['updatecategory'];
+
+
+        
+        if (empty($category_id) || empty($tags) || empty($content) || empty($url)) {
+            header('Location: /brief10/public/index.php/home');
+            exit;
+        }
+
+        if (!preg_match('/^([a-zA-Z0-9@#]+( [a-zA-Z0-9@#]+)*)?$/', $tags)) {
+            header('Location: /brief10/public/index.php/home?error=1');
+            exit;
+        }
+        
+
+        if (!preg_match('/^\d+$/', $category_id)) {
+            header('Location: /brief10/public/index.php/home?error=2');
+            exit;
+        }
+
+        if (!preg_match('/^.{1,500}$/', $content)) {
+            header('Location: /brief10/public/index.php/home?error=3');
+            exit;
+        }
+
+        if (!preg_match('/^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]*)?@)?([a-zA-Z0-9.-]+|\[[a-fA-F0-9:]+\])(:[0-9]+)?(\/[^\s]*)?$/', $url)) {
+            header('Location: /brief10/public/index.php/home?error=4');
+            exit;
+        }
+
+
+        // update in posts table :
+        $postModel = new Postes();
+        $postModel-> updatepostemodel($postid, $content, $url, $category_id);
+
+
+
+
+        $tagController = new TagsController();
+        $tags = explode(" ", $tags);
+
+        $tagController->deleteTeagToPost($postid);
+
+        foreach ($tags as $tag) {
+
+            $tag_id = $tagController->addTag(trim($tag)); 
+
+            $tagController->linktagtopost($postid, $tag_id);
+
+        }
+
+
+
+        header('Location: /brief10/public/index.php/dashboard');
+        exit;
+
     }
 
 

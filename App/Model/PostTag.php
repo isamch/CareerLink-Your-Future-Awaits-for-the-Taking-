@@ -25,4 +25,13 @@ class PostTag
     $stmt->bindParam(':tag_id', $tag_id);
     $stmt->execute();
   }
+
+  public function deletePostTag($post_id)
+  {
+    $query = "DELETE FROM post_tags WHERE post_id = :post_id";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':post_id', $post_id);
+    $stmt->execute();
+  }
+
 }

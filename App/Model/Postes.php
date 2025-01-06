@@ -50,13 +50,40 @@ class Postes
       $lastid = $this->conn->Connection()->lastInsertId();
       
       // $lastid = $this->lastinsertid($category_id, $content, $url);
-      $_SESSION['err'] = $lastid;
       
       return $lastid;
     }
 
     return false;
   }
+
+  
+    // // update :
+
+    public function updatepostemodel($id, $content, $url, $category_id)
+    {
+      $query = "UPDATE postes SET category_id = :category_id, content = :content, url = :url WHERE id = :id";
+
+      $stmt = $this->conn->Connection()->prepare($query);
+      $stmt->bindParam(':id', $id);
+      $stmt->bindParam(':content', $content);
+      $stmt->bindParam(':url', $url);
+      $stmt->bindParam(':category_id', $category_id);
+
+      if ($stmt->execute()) {
+
+        return true;
+      }
+  
+      return false;
+
+
+    }
+
+        
+
+    
+
 
 
   public function getallpostes()
@@ -103,6 +130,7 @@ class Postes
     return false;
 
   }
+
 
 
 }

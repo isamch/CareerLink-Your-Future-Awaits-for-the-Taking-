@@ -4,6 +4,7 @@
 namespace MyApp\controllers;
 use MyApp\controllers\SessionController;
 use MyApp\controllers\PostesController;
+use MyApp\Model\Category; 
 
 class DashboardController
 {
@@ -17,6 +18,8 @@ class DashboardController
     // get all data for dashboard here :
 
     $postes = (new PostesController)->displayAllPostes();
+
+    $category = (new Category())->getallcategory();
 
 
     $title = 'Welcome | dashboard page';
