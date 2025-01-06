@@ -1,103 +1,47 @@
-<table class="table align-middle mb-0 bg-white">
-      <thead class="bg-light">
-        <tr>
-          <th>Name</th>
-          <th>Title</th>
-          <th>Status</th>
-          <th>Position</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                alt=""
-                style="width: 45px; height: 45px"
-                class="rounded-circle" />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">John Doe</p>
-                <p class="text-muted mb-0">john.doe@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Software engineer</p>
-            <p class="text-muted mb-0">IT department</p>
-          </td>
-          <td>
-            <span class="badge badge-success rounded-pill d-inline">Active</span>
-          </td>
-          <td>Senior</td>
-          <td>
-            <button type="button" class="btn btn-link btn-sm btn-rounded">
-              Edit
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px" />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">Alex Ray</p>
-                <p class="text-muted mb-0">alex.ray@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Consultant</p>
-            <p class="text-muted mb-0">Finance</p>
-          </td>
-          <td>
-            <span class="badge badge-primary rounded-pill d-inline">Onboarding</span>
-          </td>
-          <td>Junior</td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-link btn-rounded btn-sm fw-bold"
-              data-mdb-ripple-color="dark">
-              Edit
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="d-flex align-items-center">
-              <img
-                src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                class="rounded-circle"
-                alt=""
-                style="width: 45px; height: 45px" />
-              <div class="ms-3">
-                <p class="fw-bold mb-1">Kate Hunington</p>
-                <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p class="fw-normal mb-1">Designer</p>
-            <p class="text-muted mb-0">UI/UX</p>
-          </td>
-          <td>
-            <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-          </td>
-          <td>Senior</td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-link btn-rounded btn-sm fw-bold"
-              data-mdb-ripple-color="dark">
-              Edit
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<?php
+
+// dump($postes)
+
+?>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">author</th>
+      <th scope="col">content</th>
+      <th scope="col">category</th>
+      <th scope="col">tags</th>
+      <th scope="col">url</th>
+      <th scope="col">delete</th>
+      <th scope="col">update</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <?php foreach ($postes as $postkey => $postvalue): ?>
+
+      <tr>
+        <td><?php echo $postvalue['id'] ?></td>
+        <td><?php echo $postvalue['username'] ?></td>
+        <td><?php echo $postvalue['content'] ?></td>
+        <td><?php echo $postvalue['name'] ?></td>
+        <td><?php echo $postvalue['tags'] ?></td>
+        <td><?php echo $postvalue['url'] ?></td>
+        <td>
+          <form method='POST' action='/brief10/public/index.php/dashboard?section=postedashboard'>
+            <input type='hidden' name='iddeleteposte' value='<?php echo $postvalue['id'] ?>'>
+            <button class="btn btn-danger btn-sm" name="deleteposte" type='submit'>delete</button>
+          </form>
+        </td>
+        <td>
+          <a href="/brief10/public/index.php/dashboard?section=postedashboard&updateposte=<?php echo $postvalue['id'] ?>" class="btn btn-primary btn-sm" name="deleteposte" type='submit'>update</a>
+        </td>
+
+
+      </tr>
+
+    <?php endforeach; ?>
+
+  </tbody>
+</table>

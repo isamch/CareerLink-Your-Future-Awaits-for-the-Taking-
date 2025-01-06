@@ -79,4 +79,34 @@ class PostesController
         header('Location: /brief10/public/index.php/home');
         exit;
     }
+
+
+
+
+    // delete postes :
+
+    
+    public function deletepostes()
+    {
+        $id = $_POST['iddeleteposte'];
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

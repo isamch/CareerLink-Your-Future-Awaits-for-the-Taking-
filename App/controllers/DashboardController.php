@@ -3,6 +3,7 @@
 
 namespace MyApp\controllers;
 use MyApp\controllers\SessionController;
+use MyApp\controllers\PostesController;
 
 class DashboardController
 {
@@ -12,6 +13,11 @@ class DashboardController
     SessionController::checksesession('user', 'login' , false);
 
     SessionController::sessionDeniedRole('user', 'home', 'client');
+
+    // get all data for dashboard here :
+
+    $postes = (new PostesController)->displayAllPostes();
+
 
     $title = 'Welcome | dashboard page';
     include '../App/view/dashboard.php';

@@ -61,7 +61,7 @@ class Postes
 
   public function getallpostes()
   {
-    $query = "SELECT postes.id, postes.title, postes.url, users.username , categories.name, postes.content, GROUP_CONCAT(tags.name) AS tags FROM postes 
+    $query = "SELECT postes.id, postes.url, users.username , categories.name, postes.content, GROUP_CONCAT(tags.name) AS tags FROM postes 
               LEFT JOIN categories ON category_id = categories.id
               LEFT JOIN post_tags ON postes.id = post_tags.post_id
               LEFT JOIN tags ON post_tags.tag_id = tags.id

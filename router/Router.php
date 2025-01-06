@@ -42,22 +42,26 @@ class Router
       // check for post method :
       if ( isset($_POST['register']) ) {
         echo 'pots register method';
-        // dump($_POST);
         $newregister->register();
       }
 
       if ( isset($_POST['login']) ) {
         echo 'pots login method';
-        // dump($_POST);
         $newregister->login();
       }
 
       if ( isset($_POST['post']) ) {
         echo ' pots post method ';
-        // dump($_POST);
-        // dump($_POST['post']);
         $newpost->addpostes();
       }
+
+      if ( isset($_POST['deleteposte']) ) {
+        echo ' delete post post method ';
+        // $newpost->addpostes();
+      }
+      
+
+
 
       call_user_func($this->routes[$route]);
 
