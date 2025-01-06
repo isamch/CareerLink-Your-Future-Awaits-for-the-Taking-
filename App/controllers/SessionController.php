@@ -16,4 +16,16 @@ class SessionController
       exit;
     }
   }
+
+  
+  public static function sessionDeniedRole($sesname, $redirectpage, $role)
+  {
+
+    if (isset($_SESSION[$sesname]) && $_SESSION[$sesname]['roles'] == $role) {
+      header("Location: /brief10/public/index.php/$redirectpage");
+      exit;
+    }
+  }
+  
+
 }

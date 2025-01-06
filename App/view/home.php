@@ -125,11 +125,11 @@ dump($category);
                                 <div>
                                     <div>
                                         <h6 class="text-body">
-                                            Autor name
+                                            <?php echo $postvalue['username'] ?>
                                             <span class="small text-muted font-weight-normal"><?php echo $postvalue['name'] ?></span>
                                             <!-- <span class="small text-muted font-weight-normal"> • </span>
                                         <span class="small text-muted font-weight-normal">2h</span> -->
-                                            <span><i class="fas fa-angle-down float-end"></i></span>
+                                            <!-- <span><i class="fas fa-angle-down float-end"></i></span> -->
                                         </h6>
                                     </div>
                                     <p style="line-height: 1.2;">

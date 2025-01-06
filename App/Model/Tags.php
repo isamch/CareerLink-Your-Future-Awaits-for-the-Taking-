@@ -52,7 +52,9 @@ class Tags
     $stmt->bindParam(':name', $name);
 
     if ($stmt->execute()) {
-      return $this->conn->Connection()->lastInsertId();
+      // $lastidtag = $this->gettagidbyname($name);
+      $lastidtag = $this->conn->Connection()->lastInsertId();
+      return $lastidtag;
     }
 
     return false;

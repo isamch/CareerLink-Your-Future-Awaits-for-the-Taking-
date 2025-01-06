@@ -22,6 +22,7 @@ $routes = [
   '/about' => ['AboutController', 'about'],
   '/login' => ['AuthController', 'loginpage'],
   '/register' => ['AuthController', 'registerpage'],
+  '/dashboard' =>['DashboardController', 'dashboardpage']
 ];
 
 
