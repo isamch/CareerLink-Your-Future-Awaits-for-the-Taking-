@@ -13,11 +13,11 @@ dump($posts);
 dump($category);
 
 // if (isset($_POST['category_id'])) {
-    // dump($_POST['category_id']);
-    // dump($_POST['tags']);
-    // dump($_POST['content']);
-    // dump($_POST['url']);
-    dump($_SESSION['err']);
+// dump($_POST['category_id']);
+// dump($_POST['tags']);
+// dump($_POST['content']);
+// dump($_POST['url']);
+dump($_SESSION['err']);
 
 // }
 
@@ -55,16 +55,16 @@ dump($category);
                                     loading="lazy" />
                                 <div class="d-flex align-items-center w-100 ps-3">
 
-                                    <form  class="w-100" method="POST" action="/brief10/public/index.php/home">
+                                    <form class="w-100" method="POST" action="/brief10/public/index.php/home">
 
                                         <div class="container">
                                             <!-- Category  -->
                                             <div class="mb-3">
                                                 <label for="category" class="form-label">Category:</label>
                                                 <select id="category" name="category_id" class="form-select w-100 border-0 py-2 px-3" required>
-                                                    <?php foreach($category as $categorykey => $categoryvalue): ?>
-                                                    <option value="<?php echo $categoryvalue['id'] ?>"><?php echo $categoryvalue['name'] ?></option>
-                                                   
+                                                    <?php foreach ($category as $categorykey => $categoryvalue): ?>
+                                                        <option value="<?php echo $categoryvalue['id'] ?>"><?php echo $categoryvalue['name'] ?></option>
+
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -117,33 +117,34 @@ dump($category);
 
 
                     <?php foreach ($posts as $postkey => $postvalue): ?>
-                        <div class="d-flex p-3 border mb-1">
-                            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
-                                height="50" alt="Avatar" loading="lazy" />
-                            <div class="d-flex w-100 ps-3">
-                                <div>
+                        <?php if ($postvalue['statusdel'] == 'one'): ?>
+                            <div class="d-flex p-3 border mb-1">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
+                                    height="50" alt="Avatar" loading="lazy" />
+                                <div class="d-flex w-100 ps-3">
                                     <div>
-                                        <h6 class="text-body">
-                                            <?php echo $postvalue['username'] ?>
-                                            <span class="small text-muted font-weight-normal"><?php echo $postvalue['name'] ?></span>
-                                            <!-- <span class="small text-muted font-weight-normal"> • </span>
+                                        <div>
+                                            <h6 class="text-body">
+                                                <?php echo $postvalue['username'] ?>
+                                                <span class="small text-muted font-weight-normal"><?php echo $postvalue['name'] ?></span>
+                                                <!-- <span class="small text-muted font-weight-normal"> • </span>
                                         <span class="small text-muted font-weight-normal">2h</span> -->
-                                            <!-- <span><i class="fas fa-angle-down float-end"></i></span> -->
-                                        </h6>
-                                    </div>
-                                    <p style="line-height: 1.2;">
-                                        <?php echo $postvalue['content'] ?>
-                                        <?php
-                                        $tagsarray = explode(",", $postvalue['tags']);
-                                        ?>
-                                        <?php foreach ($tagsarray as $tag): ?>
-                                            <a href=""><?php echo $tag; ?></a>
-                                        <?php endforeach; ?>
-                                    </p>
-                                    <a href="<?php echo $postvalue['url']; ?>" class="text-decoration-none text-primary" target="_blank">
-                                        <?php echo $postvalue['url']; ?>
-                                    </a>
-                                    <!-- <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
+                                                <!-- <span><i class="fas fa-angle-down float-end"></i></span> -->
+                                            </h6>
+                                        </div>
+                                        <p style="line-height: 1.2;">
+                                            <?php echo $postvalue['content'] ?>
+                                            <?php
+                                            $tagsarray = explode(",", $postvalue['tags']);
+                                            ?>
+                                            <?php foreach ($tagsarray as $tag): ?>
+                                                <a href=""><?php echo $tag; ?></a>
+                                            <?php endforeach; ?>
+                                        </p>
+                                        <a href="<?php echo $postvalue['url']; ?>" class="text-decoration-none text-primary" target="_blank">
+                                            <?php echo $postvalue['url']; ?>
+                                        </a>
+                                        <!-- <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
                                     <li>
                                         <i class="far fa-comment"></i>
                                     </li>
@@ -153,10 +154,10 @@ dump($category);
                                         <i class="far fa-share-square"></i>
                                     </li>
                                 </ul> -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        <?php endif; ?>
                     <?php endforeach; ?>
 
 

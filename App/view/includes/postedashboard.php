@@ -1,6 +1,6 @@
 <?php
 
-// dump($postes)
+dump($postes);
 
 ?>
 
@@ -13,6 +13,7 @@
       <th scope="col">category</th>
       <th scope="col">tags</th>
       <th scope="col">url</th>
+      <th scope="col">status</th>
       <th scope="col">delete</th>
       <th scope="col">update</th>
     </tr>
@@ -28,11 +29,22 @@
         <td><?php echo $postvalue['name'] ?></td>
         <td><?php echo $postvalue['tags'] ?></td>
         <td><?php echo $postvalue['url'] ?></td>
+        <td><?php echo $postvalue['statusdel'] ?></td>
         <td>
-          <form method='POST' action='/brief10/public/index.php/dashboard?section=postedashboard'>
-            <input type='hidden' name='iddeleteposte' value='<?php echo $postvalue['id'] ?>'>
-            <button class="btn btn-danger btn-sm" name="deleteposte" type='submit'>delete</button>
-          </form>
+          <?php if($postvalue['statusdel'] == 'off'): ?>
+            <form method='POST' action='/brief10/public/index.php/dashboard?section=postedashboard'>
+              <input type='hidden' name='idrestoreposte' value='<?php echo $postvalue['id'] ?>'>
+              <button class="btn btn-success btn-sm" name="restoreposte" type='submit'>restore</button>
+            </form>
+          <?php endif; ?>
+
+          <?php if($postvalue['statusdel'] == 'one'): ?>
+            <form method='POST' action='/brief10/public/index.php/dashboard?section=postedashboard'>
+              <input type='hidden' name='iddeleteposte' value='<?php echo $postvalue['id'] ?>'>
+              <button class="btn btn-danger btn-sm" name="deleteposte" type='submit'>delete</button>
+            </form>
+          <?php endif; ?>
+
         </td>
         <td>
           <a href="/brief10/public/index.php/dashboard?section=postedashboard&updateposte=<?php echo $postvalue['id'] ?>" class="btn btn-primary btn-sm" name="deleteposte" type='submit'>update</a>

@@ -57,10 +57,14 @@ class Router
 
       if ( isset($_POST['deleteposte']) ) {
         echo ' delete post post method ';
-        // $newpost->addpostes();
+        $newpost->deletepostes();
       }
       
-
+      if ( isset($_POST['restoreposte']) ) {
+        echo ' restore post post method ';
+        $newpost->restorepostes();
+      }
+      
 
 
       call_user_func($this->routes[$route]);

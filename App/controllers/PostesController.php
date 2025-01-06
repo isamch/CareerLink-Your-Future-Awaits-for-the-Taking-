@@ -85,16 +85,28 @@ class PostesController
 
     // delete postes :
 
-    
     public function deletepostes()
     {
         $id = $_POST['iddeleteposte'];
-
+        $postsmodel = new Postes();
+        if (!$postsmodel->deletepostemodel($id) ) {
+            echo 'delete feild';
+        }
 
 
     }
 
+    // restore poste :
+    public function restorepostes()
+    {
+        $id = $_POST['idrestoreposte'];
+        $postsmodel = new Postes();
+        if (!$postsmodel->restorepostemodel($id) ) {
+            echo 'restore feild';
+        }
 
+
+    }
 
 
 

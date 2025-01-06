@@ -61,7 +61,7 @@ class Postes
 
   public function getallpostes()
   {
-    $query = "SELECT postes.id, postes.url, users.username , categories.name, postes.content, GROUP_CONCAT(tags.name) AS tags FROM postes 
+    $query = "SELECT postes.id, postes.url, users.username , postes.statusdel,  categories.name, postes.content, GROUP_CONCAT(tags.name) AS tags FROM postes 
               LEFT JOIN categories ON category_id = categories.id
               LEFT JOIN post_tags ON postes.id = post_tags.post_id
               LEFT JOIN tags ON post_tags.tag_id = tags.id
@@ -73,4 +73,36 @@ class Postes
     $stmt = $this->conn->Connection()->query($query);
     return $stmt->fetchAll();
   }
+
+
+
+  // delete poste :
+  public function deletepostemodel($id){
+
+    $query = "UPDATE postes SET statusdel = 'off' WHERE postes.id = :posteid";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':posteid', $id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+
+  }
+  
+  // delete poste :
+  public function restorepostemodel($id){
+
+    $query = "UPDATE postes SET statusdel = 'one' WHERE postes.id = :posteid";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':posteid', $id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+
+  }
+
+
 }
