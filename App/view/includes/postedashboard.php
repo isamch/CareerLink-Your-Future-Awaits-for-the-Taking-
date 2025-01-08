@@ -169,7 +169,7 @@ $content = $postvalue['content'];
     setTimeout(() => {
       let btn = document.querySelector('#toggleform');
       btn.click();
-    }, 1000);
+    }, 500);
   </script>
 
 <?php endif; ?>

@@ -5,6 +5,7 @@ namespace Router;
 use MyApp\controllers\NotFoundController;
 use MyApp\controllers\AuthController;
 use MyApp\controllers\PostesController;
+use MyApp\controllers\CategoryController;
 
 class Router
 {
@@ -38,6 +39,7 @@ class Router
       
       $newregister = new AuthController;
       $newpost = new PostesController;
+      $newcategory = new CategoryController;
 
       // check for post method :
       if ( isset($_POST['register']) ) {
@@ -70,9 +72,32 @@ class Router
         $newpost->updateposte();
       }
 
+      if ( isset($_POST['addcategory']) ) {
+        echo ' add category post method ';
+        $newcategory->addcategory();
+      }
+      
+
+      if ( isset($_POST['updatecategory']) ) {
+        echo ' update category post method ';
+        $newcategory->updatecategory();
+      }
+      
 
 
       
+      if ( isset($_POST['deletecategory']) ) {
+        echo ' delete category post method ';
+        $newcategory->deletecategory();
+      }
+      
+      if ( isset($_POST['restorecategory']) ) {
+        echo ' restore category post method ';
+        $newcategory->restorecategory();
+      }
+
+
+
 
 
       call_user_func($this->routes[$route]);

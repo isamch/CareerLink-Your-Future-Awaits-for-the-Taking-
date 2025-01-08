@@ -17,7 +17,7 @@ dump($category);
 // dump($_POST['tags']);
 // dump($_POST['content']);
 // dump($_POST['url']);
-dump($_SESSION['err']);
+// dump($_SESSION['err']);
 
 // }
 
@@ -117,7 +117,7 @@ dump($_SESSION['err']);
 
 
                     <?php foreach ($posts as $postkey => $postvalue): ?>
-                        <?php if ($postvalue['statusdel'] == 'one'): ?>
+                        <?php if ($postvalue['statusdel'] == 'one' && $postvalue['deleted'] == 'one'): ?>
                             <div class="d-flex p-3 border mb-1">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (29).webp" class="rounded-circle"
                                     height="50" alt="Avatar" loading="lazy" />

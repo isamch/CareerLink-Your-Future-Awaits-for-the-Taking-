@@ -27,5 +27,78 @@ class Category
   }
 
 
+  public function insertcategory($categoryname) {
+
+
+    $query = "INSERT INTO categories (name) VALUES (:categoryname)";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':categoryname', $categoryname);
+ 
+    if ($stmt->execute()) {
+      return true;
+    }else{
+      return false;
+    }
+
+
+
+  }
+
+
+  // update :
+
+  
+  public function updatecategorymodel($category_id ,$categoryname) {
+
+
+    $query = "UPDATE categories SET name = :categoryname WHERE id = :id";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':categoryname', $categoryname);
+    $stmt->bindParam(':id', $category_id);
+ 
+    if ($stmt->execute()) {
+      return true;
+    }else{
+      return false;
+    }
+
+
+  }
+
+
+
+  
+
+  // delete poste :
+  public function deletecategorymodel($id){
+
+    $query = "UPDATE categories SET deleted = 'off' WHERE categories.id = :categoryeid";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':categoryeid', $id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+
+  }
+  
+  // delete poste :
+  public function restorecategorymodel($id){
+
+    $query = "UPDATE categories SET deleted = 'one' WHERE categories.id = :categoryeid";
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':categoryeid', $id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+    return false;
+
+  }
+
+
+
+
 }
 
