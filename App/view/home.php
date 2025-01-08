@@ -1,27 +1,5 @@
 <?php include 'includes/header.php'; ?>
 
-<?php
-dump($_SESSION['user']);
-
-dump($_SESSION['user']['username'])
-?>
-
-
-<?php
-
-dump($posts);
-dump($category);
-
-// if (isset($_POST['category_id'])) {
-// dump($_POST['category_id']);
-// dump($_POST['tags']);
-// dump($_POST['content']);
-// dump($_POST['url']);
-// dump($_SESSION['err']);
-
-// }
-
-?>
 
 <div class="container mt-2">
     <div class="row">
@@ -172,12 +150,28 @@ dump($category);
         <div class="col-md-3 d-none d-md-block">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <input type="text" class="form-control mb-3" placeholder="Search..." />
+                    <input id="search-input" type="text" class="form-control mb-3" placeholder="Search..." />
                     <ul class="list-unstyled">
                         <li><a href="#">Trending 1</a></li>
                         <li><a href="#">Trending 2</a></li>
                         <li><a href="#">Trending 3</a></li>
                     </ul>
+                    <hr>
+
+                    <div class="search-result" style="max-height: 300px; overflow-y: auto;">
+
+                        <!-- <div class="card w-100">
+                            <div class="card-body">
+                                <h5 class="card-title">author</h5>
+                                <span class="fs-6">category</span>
+                                <p class="card-text">content.</p>
+                                <a href="" class="text-decoration-none text-primary" target="_blank">url</a>
+                            </div>
+                        </div> -->
+
+
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -185,6 +179,97 @@ dump($category);
 </div>
 
 
+<script>
+    search();
 
+    function search() {
+
+        const inputSearch = document.querySelector('#search-input');
+
+        inputSearch.addEventListener('keyup', (event) => {
+
+            if (event.ctrlKey || event.altKey || event.metaKey) {
+                return;
+            }
+
+
+            const regex = /^[a-zA-Z\s]+$/;
+            let inputvalue = inputSearch.value;
+
+            
+
+            if (inputvalue == "" || inputvalue == " ") {
+                const searchparent = document.querySelector('.search-result');
+                searchparent.innerHTML = '';
+            
+            }
+
+            if (regex.test(inputvalue)) {
+                sendUpdatesToPhp(inputvalue);
+            }
+
+
+        });
+
+
+
+    }
+
+
+
+    function sendUpdatesToPhp(inputvalue) {
+
+
+        fetch('http://localhost:8012/brief10/public/index.php/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    inputvalue: inputvalue
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+
+                // call fun to append child:
+                // console.log(data);
+                displayresult(data);
+
+            })
+            .catch((error) => {
+                console.error('Fetch Error:', error);
+            });
+    }
+
+
+
+    function displayresult(result) {
+
+        const searchparent = document.querySelector('.search-result');
+
+        searchparent.innerHTML = '';
+
+        result.forEach(element => {
+
+            searchparent.innerHTML += `
+
+
+                <div class="card w-100 mb-1">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.username}</h5>
+                        <span class="fs-6">${element.name}</span>
+                        <p class="card-text">${element.content}</p>
+                        <p class="card-text">${element.tags}</p>
+                        <a href="${element.url}" class="text-decoration-none text-primary" target="_blank">${element.url}</a>
+                    </div>
+                </div>
+            `;
+        });
+
+
+
+    }
+</script>
 
 <?php include 'includes/footer.php'; ?>

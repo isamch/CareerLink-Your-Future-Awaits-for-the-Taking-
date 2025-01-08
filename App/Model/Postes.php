@@ -38,7 +38,7 @@ class Postes
   {
 
 
-    $query = "INSERT INTO postes (category_id, content, url, createduserid) VALUES (:category_id, :content, :url, :createduserid)";
+    $query = "INSERT INTO postes (category_id, content, url, createduserid, statusdel) VALUES (:category_id, :content, :url, :createduserid, 'one')";
     $stmt = $this->conn->Connection()->prepare($query);
     $stmt->bindParam(':category_id', $category_id);
     $stmt->bindParam(':content', $content);
@@ -48,41 +48,39 @@ class Postes
     if ($stmt->execute()) {
 
       $lastid = $this->conn->Connection()->lastInsertId();
-      
+
       // $lastid = $this->lastinsertid($category_id, $content, $url);
-      
+
       return $lastid;
     }
 
     return false;
   }
 
-  
-    // // update :
 
-    public function updatepostemodel($id, $content, $url, $category_id)
-    {
-      $query = "UPDATE postes SET category_id = :category_id, content = :content, url = :url WHERE id = :id";
+  // // update :
 
-      $stmt = $this->conn->Connection()->prepare($query);
-      $stmt->bindParam(':id', $id);
-      $stmt->bindParam(':content', $content);
-      $stmt->bindParam(':url', $url);
-      $stmt->bindParam(':category_id', $category_id);
+  public function updatepostemodel($id, $content, $url, $category_id)
+  {
+    $query = "UPDATE postes SET category_id = :category_id, content = :content, url = :url WHERE id = :id";
 
-      if ($stmt->execute()) {
+    $stmt = $this->conn->Connection()->prepare($query);
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':content', $content);
+    $stmt->bindParam(':url', $url);
+    $stmt->bindParam(':category_id', $category_id);
 
-        return true;
-      }
-  
-      return false;
+    if ($stmt->execute()) {
 
-
+      return true;
     }
 
-        
+    return false;
+  }
 
-    
+
+
+
 
 
 
@@ -104,7 +102,8 @@ class Postes
 
 
   // delete poste :
-  public function deletepostemodel($id){
+  public function deletepostemodel($id)
+  {
 
     $query = "UPDATE postes SET statusdel = 'off' WHERE postes.id = :posteid";
     $stmt = $this->conn->Connection()->prepare($query);
@@ -114,11 +113,11 @@ class Postes
       return true;
     }
     return false;
-
   }
-  
+
   // delete poste :
-  public function restorepostemodel($id){
+  public function restorepostemodel($id)
+  {
 
     $query = "UPDATE postes SET statusdel = 'one' WHERE postes.id = :posteid";
     $stmt = $this->conn->Connection()->prepare($query);
@@ -128,9 +127,37 @@ class Postes
       return true;
     }
     return false;
-
   }
 
 
 
+  // search :
+
+  public function searchmodel($keysearch)
+  {
+
+    $query = "SELECT postes.id,  postes.url, users.username , postes.statusdel, categories.deleted, categories.name, postes.content, GROUP_CONCAT(tags.name) AS tags FROM postes 
+              LEFT JOIN categories ON category_id = categories.id
+              LEFT JOIN post_tags ON postes.id = post_tags.post_id
+              LEFT JOIN tags ON post_tags.tag_id = tags.id
+              LEFT JOIN users ON users.id = postes.createduserid
+              WHERE (LOWER(postes.content) LIKE :keysearch
+                 OR LOWER(users.username) LIKE :keysearch
+                 OR LOWER(categories.name) LIKE :keysearch
+                 OR LOWER(tags.name) LIKE :keysearch)
+              AND postes.statusdel = 'one'
+              AND categories.deleted = 'one'
+              GROUP BY postes.id;";
+
+
+
+    $stmt = $this->conn->Connection()->prepare($query);
+
+    $searchwordsql = '%' . strtolower($keysearch) . '%';
+
+    $stmt->bindParam(':keysearch', $searchwordsql);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 }

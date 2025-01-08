@@ -33,7 +33,7 @@ class Router
 
  
 
-    echo 'rout in handler : ' . $route . " ";
+    //echo 'rout in handler : ' . $route . " ";
 
     if (isset($this->routes[$route])) {
       
@@ -83,8 +83,6 @@ class Router
         $newcategory->updatecategory();
       }
       
-
-
       
       if ( isset($_POST['deletecategory']) ) {
         echo ' delete category post method ';
@@ -95,8 +93,6 @@ class Router
         echo ' restore category post method ';
         $newcategory->restorecategory();
       }
-
-
 
 
 

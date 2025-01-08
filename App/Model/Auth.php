@@ -25,8 +25,7 @@ class Auth
 
     $stmt->execute();
 
-    if ($stmt->rowCount() > 0) 
-    {
+    if ($stmt->rowCount() > 0) {
       return true;
     }
     return false;
@@ -39,7 +38,7 @@ class Auth
       echo 'repet ';
       return false;
     }
-    
+
     $passwordhash = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
@@ -52,33 +51,26 @@ class Auth
 
     if ($stmt->execute()) {
       return true;
+    
     } else {
       return false;
     }
-    
-
   }
 
 
-  
+
   public function loginmodel($email)
   {
-    
+
     $stmt = $this->conn->Connection()->prepare("SELECT * FROM users WHERE email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
-    
 
-    if ($result = $stmt->fetch()) {
-      return $result;
-      // dump($result);
-      
-    }else{
+
+    if ($stmt->rowCount() > 0) {
+      return $stmt->fetch();
+    } else {
       return false;
     }
-
   }
-
-
-  
 }

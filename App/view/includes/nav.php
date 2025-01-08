@@ -17,6 +17,9 @@
                     <li class="nav-item me-4"><a class="nav-link" href="/brief10/public/index.php/dashboard">Dashboard</a></li>
                     <?php endif ?>
                     <li class="nav-item"><a class="nav-link" href="/brief10/public/index.php/profile">Profile</a></li>
+                    <li class="nav-item"><a href="/brief10/public/index.php/logout" class="btn btn-danger">Logout</a></a></li>
+                   
+
                 </ul>
                 <ul class="navbar-nav my-3 my-lg-0 d-lg-none">
                     <li class="nav-item me-4"><a class="nav-link" href="/brief10/public/index.php/">Home</a></li>
@@ -24,7 +27,10 @@
                     <li class="nav-item me-4"><a class="nav-link" href="/brief10/public/index.php/dashboard">Dashboard</a></li>
                     <?php endif ?>
                     <li class="nav-item"><a class="nav-link" href="/brief10/public/index.php/profile">Profile</a></li>
+                    <li class="nav-item"><a href="/brief10/public/index.php/logout" class="btn btn-danger">Logout</a></li>
                 </ul>
+
+
             <?php endif ?>
 
             <?php if (!isset($_SESSION['user'])): ?>

@@ -42,6 +42,16 @@
                     </label>
                   </div>
 
+                  <?php if(isset($_SESSION['error'])): ?>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <p style="color: red;"><?php echo  $_SESSION['error']; ?></p>
+                    </div>
+
+                    <?php unset($_SESSION['error']); ?>
+
+                  <?php endif; ?>
+                  
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button  type="submit" name="register" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Register</button>
                   </div>

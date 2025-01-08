@@ -57,14 +57,19 @@
             <i class='bx bx-file nav_logo-icon'></i>
             <span class="nav_name">Postes</span>
           </a>
+
+          <?php if($_SESSION['user']['roles'] == 'admin'): ?>
+
           <a href="/brief10/public/index.php/dashboard?section=categorydashboard" class="nav_link <?php echo (isset($_GET['section']) && $_GET['section'] == 'categorydashboard') ? ' active' : ''; ?>">
             <i class='bx bx-category nav_logo-icon'></i>
             <span class="nav_name">Category</span>
           </a>
+
           <a href="/brief10/public/index.php/dashboard?section=userdashboard" class="nav_link <?php echo (isset($_GET['section']) && $_GET['section'] == 'userdashboard') ? ' active' : ''; ?>">
             <i class='bx bx-user nav_logo-icon'></i>
             <span class="nav_name">Users</span>
           </a>
+          <?php endif; ?>
         </div>
       </div>
       <a href="#" class="nav_link">

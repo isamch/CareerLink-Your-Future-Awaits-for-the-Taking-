@@ -66,8 +66,10 @@ class AuthController
       exit;
     } else {
 
-      echo 'email exist';
 
+      $_SESSION['error'] = 'email exist';
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      exit;
     }
     
   }
@@ -108,26 +110,53 @@ class AuthController
     // send data to model login :
     $authloging = new Auth();
     
-    if ($result = $authloging->loginmodel($email, $password)) {
+
+    $result = $authloging->loginmodel($email, $password);
+
+    if ($result) {
       
       // dump($result);
 
       if(password_verify($password, $result['password']) || $password == $result['password']){
         $_SESSION['user'] = $result;
         header('Location: /brief10/public/index.php/home');
-        exit; 
+        exit;
+
       }else{
-        header('Location: /brief10/public/index.php/login');
+        $_SESSION['error'] = 'password incorecct';
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        // header('Location: /brief10/public/index.php/login');
         exit;
       }
 
+
     }else{
-      echo 'user  not found';
-      header('Location: /brief10/public/index.php/login');
+      $_SESSION['error'] = 'email not incorecct';
+
+      header('Location: ' . $_SERVER['HTTP_REFERER']);
+      // header('Location: /brief10/public/index.php/login');
       exit;
     }
 
 
   }
+
+
+  public function logout()
+  {
+    session_start();
+
+    // session_unset();
+
+    unset($_SESSION['user']);
+
+    session_destroy();
+
+    header("Location: /brief10/public/index.php/login");
+    exit();
+
+  }
+
+
 
 }

@@ -1,6 +1,6 @@
 <?php 
 
-echo 'start';
+// echo 'start';
 
 session_start();
 
@@ -23,8 +23,11 @@ $routes = [
   '/login' => ['AuthController', 'loginpage'],
   '/register' => ['AuthController', 'registerpage'],
   '/dashboard' =>['DashboardController', 'dashboardpage'],
+  '/dashboard' =>['DashboardController', 'dashboardpage'],
   
-  '/dashboard' =>['DashboardController', 'dashboardpage']
+  '/search' =>['PostesController', 'search'],
+  '/logout' =>['AuthController', 'logout']
+
 ];
 
 

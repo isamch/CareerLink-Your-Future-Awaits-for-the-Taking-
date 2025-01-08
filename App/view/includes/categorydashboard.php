@@ -1,7 +1,3 @@
-<?php
-
-dump($category);
-?>
 
 <?php foreach ($category as $categorykey => $categoryvalue): ?>
 

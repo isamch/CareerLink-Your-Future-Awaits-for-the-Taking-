@@ -37,7 +37,7 @@ class PostesController
             header('Location: /brief10/public/index.php/home?error=1');
             exit;
         }
-        
+
 
         if (!preg_match('/^\d+$/', $category_id)) {
             header('Location: /brief10/public/index.php/home?error=2');
@@ -70,7 +70,7 @@ class PostesController
         $tags = explode(" ", $tags);
 
         foreach ($tags as $tag) {
-            $tag_id = $tagController->addTag(trim($tag)); 
+            $tag_id = $tagController->addTag(trim($tag));
 
             $tagController->linktagtopost($post_id, $tag_id);
         }
@@ -93,7 +93,7 @@ class PostesController
         $category_id = $_POST['updatecategory'];
 
 
-        
+
         if (empty($category_id) || empty($tags) || empty($content) || empty($url)) {
             header('Location: /brief10/public/index.php/home');
             exit;
@@ -103,7 +103,7 @@ class PostesController
             header('Location: /brief10/public/index.php/home?error=1');
             exit;
         }
-        
+
 
         if (!preg_match('/^\d+$/', $category_id)) {
             header('Location: /brief10/public/index.php/home?error=2');
@@ -123,7 +123,7 @@ class PostesController
 
         // update in posts table :
         $postModel = new Postes();
-        $postModel-> updatepostemodel($postid, $content, $url, $category_id);
+        $postModel->updatepostemodel($postid, $content, $url, $category_id);
 
 
 
@@ -135,17 +135,15 @@ class PostesController
 
         foreach ($tags as $tag) {
 
-            $tag_id = $tagController->addTag(trim($tag)); 
+            $tag_id = $tagController->addTag(trim($tag));
 
             $tagController->linktagtopost($postid, $tag_id);
-
         }
 
 
 
         header('Location: /brief10/public/index.php/dashboard');
         exit;
-
     }
 
 
@@ -157,11 +155,9 @@ class PostesController
     {
         $id = $_POST['iddeleteposte'];
         $postsmodel = new Postes();
-        if (!$postsmodel->deletepostemodel($id) ) {
+        if (!$postsmodel->deletepostemodel($id)) {
             echo 'delete feild';
         }
-
-
     }
 
     // restore poste :
@@ -169,24 +165,34 @@ class PostesController
     {
         $id = $_POST['idrestoreposte'];
         $postsmodel = new Postes();
-        if (!$postsmodel->restorepostemodel($id) ) {
+        if (!$postsmodel->restorepostemodel($id)) {
             echo 'restore feild';
         }
-
-
     }
 
 
 
 
 
+    // search ajax :
 
+    public function search()
+    {
 
+        $data = json_decode(file_get_contents('php://input'), true);
+        
+        $inputvalue = $data['inputvalue'];
+                
+        if (preg_match('/^[a-zA-Z\s]+$/', $inputvalue)) {
+            
+            $postModel = new Postes();
+            
+            // echo $postModel->searchmodel($inputvalue);
 
+            echo json_encode($postModel->searchmodel($inputvalue));    
+    
+        
+        }
 
-
-
-
-
-
+    }
 }

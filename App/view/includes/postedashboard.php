@@ -35,6 +35,8 @@
 
       ?>
 
+  
+      <?php if($_SESSION['user']['username'] == $postvalue['username'] ): ?>
       <tr>
         <td><?php echo $postvalue['id'] ?></td>
         <td><?php echo  $postvalue['username'] ?></td>
@@ -51,6 +53,7 @@
 
         <td><?php echo $postvalue['url'] ?></td>
         <td><?php echo $postvalue['statusdel'] ?></td>
+   
         <td>
           <?php if ($postvalue['statusdel'] == 'off'): ?>
             <form method='POST' action='/brief10/public/index.php/dashboard?section=postedashboard'>
@@ -79,6 +82,8 @@
 
 
       </tr>
+
+      <?php endif; ?>
 
     <?php endforeach; ?>
 
