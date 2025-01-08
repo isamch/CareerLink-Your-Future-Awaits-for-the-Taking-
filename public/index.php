@@ -1,6 +1,10 @@
 <?php 
 
-echo 'start';
+// echo 'start';
+
+session_start();
+
+// session_unset();
 
 require_once '../vendor/autoload.php';
 
@@ -14,9 +18,16 @@ $router = new Router();
 
 $routes = [
   '/' => ['LandingepageController', 'landingepage'],
+  '/home' => ['HomeController', 'home'],
   '/about' => ['AboutController', 'about'],
   '/login' => ['AuthController', 'loginpage'],
   '/register' => ['AuthController', 'registerpage'],
+  '/dashboard' =>['DashboardController', 'dashboardpage'],
+  '/dashboard' =>['DashboardController', 'dashboardpage'],
+  
+  '/search' =>['PostesController', 'search'],
+  '/logout' =>['AuthController', 'logout']
+
 ];
 
 

@@ -16,15 +16,17 @@
 
         <div class="lc-block mb-3">
           <div editable="rich">
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
+            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world's most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.
             </p>
           </div>
         </div>
 
-        <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start"><a class="btn btn-primary px-4 me-md-2" href="#" role="button">Click me, I'm a button</a>
-          <a class="btn btn-outline-secondary px-4" href="#" role="button">Click me, I'm a button</a>
+        <div class="lc-block d-grid gap-2 d-md-flex justify-content-md-start">
+          <a class="btn btn-primary px-4 me-md-2" href="/brief10/public/index.php/login" role="button">Login</a>
+          <a class="btn btn-outline-secondary px-4" href="/brief10/public/index.php/register" role="button">Register</a>
         </div>
       </div>
+
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
         <div class="lc-block"><img class="rounded-start w-100" src="https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8M3x8d2Vic2l0ZXxlbnwwfDF8fHwxNjIxNDQ4NTEw&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080" alt="Photo by Diego PH" width="720"></div>
       </div>
@@ -45,7 +47,7 @@
 
       <div class="row g-4 g-xxl-5">
         <div class="col-lg-4 text-center">
-          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 " style="" id="">
+          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 ">
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
                 <div class="lc-block mb-4">
@@ -110,7 +112,7 @@
           </div>
         </div>
         <div class="col-lg-4 text-center">
-          <div class="lc-block card h-100 px-xl-3 border-0 bg-light py-lg-4 position-relative" style="">
+          <div class="lc-block card h-100 px-xl-3 border-0 bg-light py-lg-4 position-relative">
             <div class="card-body d-flex flex-column justify-content-between">
 
               <div class="lc-block position-absolute top-0 mt-2 end-0 me-3">
@@ -179,7 +181,7 @@
         </div>
 
         <div class="col-lg-4 text-center">
-          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 " style="" id="">
+          <div class="lc-block bg-dark text-light card h-100 px-xl-3 border-0 py-lg-4 ">
             <div class="card-body d-flex flex-column justify-content-between">
               <div>
                 <div class="lc-block mb-4">
